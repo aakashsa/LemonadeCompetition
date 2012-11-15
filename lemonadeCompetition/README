@@ -1,0 +1,51 @@
+***************************************************************************
+*                         LeMoNaDe CoMpEtItIoN                            *
+***************************************************************************
+*       HW5 / Question 4: http://www.cs.cmu.edu/~15381/HW5/HW5.pdf        *
+***************************************************************************
+***************************************************************************
+* Author: Danai Koutra                                                    *
+* Date: 11/07/2012                                                        *
+***************************************************************************
+
+** Requirements: Matlab
+
+** To run the code: >> make
+   or in the matlab console window type:
+                    >> scores = lemonadeCompetition( 7,'yourAndrewID')
+
+If you change the name of the folder 'yourAndrewID', you should also change
+the second argument of the function lemonadeCompetition in the previous 
+command. If you want to run the competition for more rounds, change the first
+argument of the function (currently it is set to 7). You must also populate
+the files 'adversary1.txt' and 'adversary2.txt' to have as many lines as the
+number of rounds (see below).
+
+
+
+** Description of files:
+===============================================================================
+Files you may want to change:
+===============================================================================
+- makefile: You might want to change the number of rounds (first argument of
+            the function lemonadeCompetition).
+- adversary1.txt: The file must have as many lines as the number of rounds
+            that you specify in the makefile. Each line has one integer per 
+            line, and it corresponds to the position that your first 
+            adversary chose at the corresponding round.
+- adversary2.txt: Similar to adversary1.txt.
+- yourAndrewID/HW5/LEMONADE: You should put the program files for your agent
+            in this folder.
+- PickMyLemonadeSpot.sh: You should change the contents of this file, so that
+            it executes your program. The output of the latter should be the
+            file position.txt with only one integer in the first line (the
+            position of your stand at the following round).
+- previous.txt: See the description of the programming exercise of HW5.
+===============================================================================
+===============================================================================
+Files you may don't need to change:
+===============================================================================
+- lemonadeCompetition.m: runs the competition between you and the adversaries.
+- compute_scores.m: Given 3 positions around the island, it computes the points
+             earned by you and your two adversaries.
+
