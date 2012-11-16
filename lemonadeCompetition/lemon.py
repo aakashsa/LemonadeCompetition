@@ -2,6 +2,7 @@ def parseLine (filename):
   file_content = loadFileList(filename)
   last_line = file_content[-1]
   split_line = last_line.split("\t")
+  split_line = [int(x) for x in split_line]
   return split_line
 
 # save the input file content into a list of strings 
@@ -26,6 +27,7 @@ def oppositePosition (current):
 
 def nextMove (inputfile,outputfile):
   last_line = parseLine(inputfile)
+  print last_line
   if (last_line[4] > last_line[5]):
     new_position = oppositePosition(last_line[2])
   else:
