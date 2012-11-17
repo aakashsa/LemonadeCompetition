@@ -34,7 +34,7 @@ cp_comm = sprintf('cp previous.txt %s/HW5/LEMONADE/', andrewID);
 %% Loading the positions of the adversaries
 load 'adversary1.txt'
 positionAdv1 = adversary1;
-load 'adversary2.txt'
+%%load 'adversary2.txt'
 %%positionAdv2 = adversary2;
 clear adversary1 %%adversary2
 
