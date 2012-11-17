@@ -35,8 +35,8 @@ cp_comm = sprintf('cp previous.txt %s/HW5/LEMONADE/', andrewID);
 load 'adversary1.txt'
 positionAdv1 = adversary1;
 load 'adversary2.txt'
-%%positionAdv2 = adversary2;
-clear adversary1 %%adversary2
+positionAdv2 = adversary2;
+clear adversary1 adversary2
 
 %% Actual Lemonade Competition
 for i = 1 : rounds
@@ -48,7 +48,6 @@ for i = 1 : rounds
    system(cp_comm);
    system(exec_comm);
    positionPath = sprintf('%s/HW5/LEMONADE/position.txt', andrewID);
-   adv2Path = sprintf('%s/HW5/LEMONADE/adv2pos.txt', andrewID);
    if ~exist(positionPath, 'file')
        fileDoesNotExist
        return;
@@ -58,16 +57,7 @@ for i = 1 : rounds
        outOfRange
        return;
    end
-   if ~exist(adv2Path, 'file')
-       fileDoesNotExist
-       return;
-   end
-   load(adv2Path)
-   if adv2pos < 1 || adv2pos > 12
-       outOfRange
-       return;
-   end
-   history(i+1,:) = [position, positionAdv1(i),adv2pos];
+   history(i+1,:) = [position, positionAdv1(i), positionAdv2(i)];
    scores(i+1,:) = compute_scores(history(i+1,:));
    cum_scores(i+1,:) = cum_scores(i,:) + scores(i+1,:);
 end

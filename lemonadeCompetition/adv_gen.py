@@ -24,4 +24,4 @@ def nRandom(moves,outputfile):
 
 
 nRandom(moves,"adversary1.txt")
-nRandom(moves,"adversary2.txt")
+#nRandom(moves,"adversary2.txt")
