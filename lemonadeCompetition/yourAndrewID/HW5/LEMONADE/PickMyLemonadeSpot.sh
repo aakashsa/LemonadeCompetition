@@ -1,4 +1,2 @@
-#!/bin/bash
-
-post=12
-echo $post > position.txt
+python lemon.py
+python adv2_gen.py
