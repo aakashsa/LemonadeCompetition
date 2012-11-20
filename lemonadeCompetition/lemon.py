@@ -1,4 +1,4 @@
-
+import random
 
 
 def firstLineParser(firstline):
@@ -50,9 +50,11 @@ def findStrategy(position1,position2,position3):
                 final2 = 2
         if (stick3):
                 final3 = 2
-        if ((not stick2) and follow2):
+        #if ((not stick2) and follow2):
+        if (follow2):
                 final2 = 3
-        if ((not stick) and follow3):
+        #if ((not stick3) and follow3):
+        if (follow3):
                 final3 = 3
         return (final2,final3)
 
@@ -60,12 +62,13 @@ def findStrategy(position1,position2,position3):
 def parseLine (filename):
   file_content = loadFileList(filename)
   first_line = file_content[0]
-  #print "First Line ",first_line
-  first_line = first_line.split(" ")
+  #print "type of First Line ",type(first_line)
+
   last_line = file_content[-1]
-  split_line = last_line.split("\t")
+  split_line = last_line.split()
   split_line = [int(x) for x in split_line]
-  return split_line
+  round_number = firstLineParser(first_line)
+  return (round_number,split_line)
 
 # save the input file content into a list of strings 
 # where each line is in a string
@@ -88,13 +91,50 @@ def oppositePosition (current):
     return current + 6
 
 def nextMove (inputfile,outputfile):
-  last_line = parseLine(inputfile)
-  print last_line
-  if (last_line[7] > last_line[8]):
-    new_position = oppositePosition(last_line[2])
+  (round_number,last_line) = parseLine(inputfile)
+  if ( round_number <=10):
+	  new_position = minimumFollowStrategy(last_line)
   else:
-    new_position = oppositePosition(last_line[1])
+	  pos1,pos2,pos3 = parseContent(inputfile)
+	  (advStrategy1,advStrategy2) = findStrategy(pos1,pos2,pos3)
+			
+	  if (advStrategy1==advStrategy2):
+		if (advStrategy1==1):
+			new_position = random.randrange(1,13)
+		if (advStrategy1==2):
+			if (abs(last_line[2]-last_line[1])==6):			
+				new_position = last_line[1]
+			else: 
+				new_position = minimumFollowStrategy(last_line)
+		if (advStrategy1==3):
+			if (abs(last_line[2]-last_line[0])==6):
+				new_position = last_line[0]
+			if (abs(last_line[1]-last_line[0])==6):
+				new_position = last_line[0]		
+			else:	
+				new_position = last_line[1]
+		
+	  elif (advStrategy1 == 1 and ( advStrategy2 == 2 or advStrategy2 == 3)):
+		new_position = oppositePosition(last_line[2])
+	  elif (advStrategy2 == 1 and ( advStrategy1 == 2 or advStrategy1 == 3)):
+		new_position == oppositePosition(last_line[1])	
+	  elif (advStrategy1 == 2 and advStrategy2 == 3):
+		new_position == oppositePosition(last_line[1])
+	  elif (advStrategy2 == 2 and advStrategy1 == 3):
+		new_position == oppositePosition(last_line[2])			
+	  else:
+		new_position = minimumFollowStrategy(last_line)	
   writeFileString(str(new_position),outputfile)
+
+
+def minimumFollowStrategy(last_line):
+    if (last_line[7] > last_line[8]):
+    	new_position = oppositePosition(last_line[2])
+    else:
+    	new_position = oppositePosition(last_line[1])
+    return new_position	
+
+
 
 
 nextMove("previous.txt","position.txt")
