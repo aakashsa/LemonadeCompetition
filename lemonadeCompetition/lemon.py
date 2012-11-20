@@ -1,12 +1,11 @@
 
 
 
-
 def firstLineParser(firstline):
   firstline = firstline.split()
   return int(firstline[-1])
 
-def parseContent(filename);
+def parseContent(filename):
   file_content = loadFileList(filename)
   file_content = file_content [2:]
   position1 = []
@@ -42,32 +41,31 @@ def findStrategy(position1,position2,position3):
             if (position3[i]!=position3[i-1]):
                   stick3 = False
         for i in range(0,10):
-            if (abs(position2[i]-position3[i])!=6 && (abs(position2[i]-position3[i])!=6)   ): 
+            if (abs(position2[i]-position3[i])!=6 and (abs(position2[i]-position3[i])!=6)   ): 
                   follow2 = False
-            if (abs(position2[i]-position3[i])!=6 && (abs(position2[i]-position3[i])!=6)   ):
+            if (abs(position2[i]-position3[i])!=6 and (abs(position2[i]-position3[i])!=6)   ):
                   follow3 = False
          
         if (stick2):
                 final2 = 2
         if (stick3):
                 final3 = 2
-        if (!stick2 && follow2):
+        if ((not stick2) and follow2):
                 final2 = 3
-        if (!stick && follow3):
+        if ((not stick) and follow3):
                 final3 = 3
         return (final2,final3)
-
-                  
-
 
 
 def parseLine (filename):
   file_content = loadFileList(filename)
-  round_number = firstLineParser(file_content[0])
+  first_line = file_content[0]
+  #print "First Line ",first_line
+  first_line = first_line.split(" ")
   last_line = file_content[-1]
-  split_line = last_line.split()
+  split_line = last_line.split("\t")
   split_line = [int(x) for x in split_line]
-  return (round_number,split_line)
+  return split_line
 
 # save the input file content into a list of strings 
 # where each line is in a string
@@ -90,21 +88,14 @@ def oppositePosition (current):
     return current + 6
 
 def nextMove (inputfile,outputfile):
-  (round_number,last_line) = parseLine(inputfile)
-  
-  if round_number < 11:
+  last_line = parseLine(inputfile)
   print last_line
-    if (last_line[4] > last_line[5]):
-      new_position = oppositePosition(last_line[2])
-    else:
-      new_position = oppositePosition(last_line[1])
-  elif: 
-    
-
+  if (last_line[7] > last_line[8]):
+    new_position = oppositePosition(last_line[2])
+  else:
+    new_position = oppositePosition(last_line[1])
   writeFileString(str(new_position),outputfile)
 
 
 nextMove("previous.txt","position.txt")
-
-
 
